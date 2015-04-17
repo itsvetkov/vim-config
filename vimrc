@@ -6,6 +6,11 @@ set guifont=Consolas:h10:cRUSSIAN
 set guioptions=acg
 "winsize 126 46
 
+" Fix for default Ubuntu terminal
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
+
 colorscheme xoria256
 
 set nocompatible
@@ -19,7 +24,7 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'itpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 " Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
