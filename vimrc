@@ -25,6 +25,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
 " Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
