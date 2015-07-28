@@ -2,9 +2,17 @@
 language mes en_US.UTF-8
 set langmenu=en_US.UTF-8
 set helplang=en
-set guifont=Consolas:h10:cRUSSIAN
-set guioptions=acg
-"winsize 126 46
+
+if has('gui_running')
+    set guioptions=acg
+    if has('gui_win32')
+        set guifont=Consolas:h10:cRUSSIAN
+    endif
+    if has('gui_macvim')
+        set guifont=Menlo\ Regular:h10
+        set linespace=2
+    endif
+endif
 
 " Fix for default Ubuntu terminal
 if $COLORTERM == 'gnome-terminal'
@@ -22,15 +30,31 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
+" Plugin 'wincent/Command-T'
+Plugin 'Shougo/unite.vim'
+" Plugin 'jeaye/color_coded'
 " Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
 filetype plugin indent on
+
+" Highlight the current line in every window and update the highlight as the
+" cursor moves
+set cursorline
+" Set invisible character represemtations
+set listchars=tab:▸—,eol:¬,trail:·
+" Toggle invisible characters
+nmap <silent> <leader>i :set list!<CR>
 
 " Turn on that syntax highlighting
 syntax on
 
 " Why is this not a default
 set hidden
+
+" Add more option to 'grep' to ignore errors and binary matches
+if has('unix')
+    set grepprg=grep\ -nsI\ $*\ /dev/null
+endif
 
 " Don't update the display while executing macros
 " set lazyredraw
@@ -62,7 +86,20 @@ set cpoptions=ces$
 
 " Set the status line the way I like it
 " %<%f%h%m%r\ %b\ %{&encoding}\ 0x\ \ %l,%c%V\ %P
-set stl=%<%f\ %m\ %r\ Line:\ %l/%L[%p%%]\ Col:\ %c\ Buf:\ #%n\ [%b][0x%B]\ %h%m%r\ %b\ %{&fileencoding}\ 0x\ \ %l,%c%V\ %P
+set statusline=%<%f     " Filename
+set statusline+=:
+set statusline+=%l
+set statusline+=:
+set statusline+=%c
+set statusline+=%=
+set statusline+=#%n     " Buffer number
+set statusline+=\       " Space
+set statusline+=%m      " Is modified?
+set statusline+=%r      " Is read-only?
+set statusline+=\       " Space
+set statusline+=%{&fileencoding}
+set statusline+=\       " Space
+set statusline+=%P
 
 " Always put a status line in, even if there is only one window
 set laststatus=2
@@ -95,6 +132,7 @@ set showcmd
 
 " Включаем нумерацию строк
 set number
+set relativenumber
 set numberwidth=6
 
 " Фолдинг по отсупам
@@ -125,7 +163,10 @@ set tabstop=4
 " Включаем "умные" отступы ( например, автоотступ после {)
 set smartindent
 
-set cinoptions+=(0
+set cinoptions=(0
+set cinoptions+=N-s
+set cinoptions+=g-1
+
 set wildmenu
 
 autocmd BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl set filetype=glsl
