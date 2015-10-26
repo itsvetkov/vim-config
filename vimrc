@@ -30,16 +30,22 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'rking/ag.vim'
-Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'Shougo/unite.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
 " Plugin 'jeaye/color_coded'
+" Plugin 'scrooloose/nerdtree'
+" Plugin 'Shougo/unite.vim'
 " Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
 filetype plugin indent on
 
-let g:ctrlp_user_command = 'ag --files-with-matches --nogroup --nocolor -g "" %s'
+unlet g:ctrlp_user_command
+let g:ctrlp_user_command = {
+  \ 'types': {
+    \ 1: ['.git', 'cd %s && git ls-files'],
+    \ },
+  \ 'fallback': 'ag --files-with-matches --nogroup --nocolor -g "" %s'
+  \ }
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 " Highlight the current line in every window and update the highlight as the
@@ -166,9 +172,11 @@ syntax on
 set expandtab
 
 " Размер табулации по умолчанию
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+
+set colorcolumn=80
 
 " Включаем "умные" отступы ( например, автоотступ после {)
 set smartindent
