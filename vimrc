@@ -29,21 +29,31 @@ call vundle#begin()
 " Let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
-" Plugin 'wincent/Command-T'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Shougo/unite.vim'
+Plugin 'FelikZ/ctrlp-py-matcher'
 " Plugin 'jeaye/color_coded'
 " Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
 filetype plugin indent on
+
+let g:ctrlp_user_command = 'ag --files-with-matches --nogroup --nocolor -g "" %s'
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
 
 " Highlight the current line in every window and update the highlight as the
 " cursor moves
 set cursorline
 " Set invisible character represemtations
 set listchars=tab:▸—,eol:¬,trail:·
+
 " Toggle invisible characters
 nmap <silent> <leader>i :set list!<CR>
+
+" Search word under cursor
+nnoremap <silent> <leader>w :LAg! --word-regexp --case-sensitive <C-R><C-W><CR>
+nnoremap <silent> <leader>W :LAg! <C-R><C-W><CR>
 
 " Turn on that syntax highlighting
 syntax on
