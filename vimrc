@@ -39,7 +39,6 @@ Plugin 'FelikZ/ctrlp-py-matcher'
 call vundle#end()
 filetype plugin indent on
 
-unlet g:ctrlp_user_command
 let g:ctrlp_user_command = {
   \ 'types': {
     \ 1: ['.git', 'cd %s && git ls-files'],
