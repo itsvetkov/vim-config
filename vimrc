@@ -54,7 +54,7 @@ set cursorline
 set listchars=tab:▸—,eol:¬,trail:·
 
 " Toggle invisible characters
-nmap <silent> <leader>i :set list!<CR>
+nmap <silent> <leader>i :setlocal list!<CR>
 
 " Search word under cursor
 nnoremap <silent> <leader>w :LAg! --word-regexp --case-sensitive <C-R><C-W><CR>
