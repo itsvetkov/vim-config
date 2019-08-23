@@ -32,6 +32,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'rking/ag.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
+Plugin 'diepm/vim-rest-console'
 " Plugin 'jeaye/color_coded'
 " Plugin 'scrooloose/nerdtree'
 " Plugin 'Shougo/unite.vim'
@@ -171,9 +172,9 @@ syntax on
 set expandtab
 
 " Размер табулации по умолчанию
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
 
 set colorcolumn=80
 
@@ -202,3 +203,7 @@ set exrc
 " Disable unsafe commands in project-specific .vimrc files
 " This setting have to go last in global .vimrc
 set secure
+
+" Visual Studio style to build the project
+nmap <F5> :make<CR>
+set makeprg=./makeprg.sh
